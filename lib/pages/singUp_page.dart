@@ -1,43 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'singUp_page.dart';
 
 import '../login_state.dart';
 
-class LoginPage extends StatelessWidget {
+class SingUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text("Login"),
+          title: Text("SingUp"),
         ),
       body: Center(
-        child: Consumer<LoginState>(
-          builder: (BuildContext context, LoginState value, Widget child) {
-            return child;
-          },
-          child: LoginForm(),
-        ),
+        child:SingUpForm(),
       ),
     );
   }
 }
-class LoginForm extends StatefulWidget {
+class SingUpForm extends StatefulWidget {
   @override
-  LoginFormState createState() {
-    return LoginFormState();
+  SingUpFormState createState() {
+    return SingUpFormState();
   }
 }
-
+String usuario= "";
+String password="";
 
 // Define a corresponding State class.
 // This class holds data related to the form.
-class LoginFormState extends State<LoginForm> {
+class SingUpFormState extends State<SingUpForm> {
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   //
   // Note: This is a `GlobalKey<FormState>`,
-  // not a GlobalKey<LoginFormState>.
+  // not a GlobalKey<SingUpFormState>.
   final _formKey = GlobalKey<FormState>();
 
   
@@ -56,9 +51,7 @@ class LoginFormState extends State<LoginForm> {
               if (value.isEmpty) {
                 return 'Please enter some text';
               }
-               if(value!=Provider.of<LoginState>(context).getEmail()){
-                return "Usuario errado";
-              }
+             usuario=value;
               return null;
             },
             decoration: InputDecoration(
@@ -72,10 +65,7 @@ class LoginFormState extends State<LoginForm> {
               if (value.isEmpty) {
                 return 'Please enter some text';
               }
-              if(value!=(Provider.of<LoginState>(context).getPassword())){
-               
-                return "Contraseña errada";
-              }
+              password=value;
               return null;
             },
             obscureText: true,
@@ -93,32 +83,16 @@ class LoginFormState extends State<LoginForm> {
                   // otherwise.
                   if (_formKey.currentState.validate()) {
                     // If the form is valid, display a Snackbar.
-                    Provider.of<LoginState>(context).login();
+                    Provider.of<LoginState>(context).singUp(usuario,password);
                     Scaffold.of(context)
-                        .showSnackBar(SnackBar(content: Text('Processing Data')));
+                        .showSnackBar(SnackBar(content: Text('Registrando')));
+                    Navigator.pop(context);
                   }
                 },
-                child: Text('LogIn'),
+                child: Text('SingIn'),
               ),
             ),
           ),
-          Center(child: GestureDetector(
-              onTap: (){
-                Navigator.push(context,MaterialPageRoute(builder: (context) => SingUpPage()));
-
-              },
-                      child: Text(
-                'Crear usuario',
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 20,
-                  decoration: TextDecoration.underline,
-                  color: Colors.lightBlue,
-                    ),
-                    
-              ),
-          )),
         ],
       ),
     );

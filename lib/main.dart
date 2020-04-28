@@ -21,12 +21,13 @@ class MyApp extends StatelessWidget {
           '/': (BuildContext context) {
             var state = Provider.of<LoginState>(context);
             if (state.isLoggedIn()) {
+              Provider.of<LoginState>(context).recibir();
               return HomePage();
             } else {
+              Provider.of<LoginState>(context).recibir();
               return LoginPage();
             }
           },
-          
         },
       ),
     );
