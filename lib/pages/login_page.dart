@@ -9,8 +9,8 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text("Login"),
-        ),
+        title: Text("Login"),
+      ),
       body: Center(
         child: Consumer<LoginState>(
           builder: (BuildContext context, LoginState value, Widget child) {
@@ -22,13 +22,13 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
+
 class LoginForm extends StatefulWidget {
   @override
   LoginFormState createState() {
     return LoginFormState();
   }
 }
-
 
 // Define a corresponding State class.
 // This class holds data related to the form.
@@ -40,50 +40,39 @@ class LoginFormState extends State<LoginForm> {
   // not a GlobalKey<LoginFormState>.
   final _formKey = GlobalKey<FormState>();
 
-  
-
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
-     return Form(
+    return Form(
       key: _formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextFormField(
-           
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-               if(value!=Provider.of<LoginState>(context).getEmail()){
-                return "Usuario errado";
-              }
-              return null;
-            },
-            decoration: InputDecoration(
-                  hintText: "Correo",
-                  icon: Icon(Icons.mail)
-                )
-          ),
-           TextFormField(
-           
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              if(value!=(Provider.of<LoginState>(context).getPassword())){
-               
-                return "Contraseña errada";
-              }
-              return null;
-            },
-            obscureText: true,
-            decoration: InputDecoration(
-                  hintText: "Contraseña",
-                  icon: Icon(Icons.lock)
-                )
-          ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                if (value != Provider.of<LoginState>(context).getEmail()) {
+                  return "Usuario errado";
+                }
+                return null;
+              },
+              decoration:
+                  InputDecoration(hintText: "Correo", icon: Icon(Icons.mail))),
+          TextFormField(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                if (value != (Provider.of<LoginState>(context).getPassword())) {
+                  return "Contraseña errada";
+                }
+                return null;
+              },
+              obscureText: true,
+              decoration: InputDecoration(
+                  hintText: "Contraseña", icon: Icon(Icons.lock))),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: Center(
@@ -94,30 +83,30 @@ class LoginFormState extends State<LoginForm> {
                   if (_formKey.currentState.validate()) {
                     // If the form is valid, display a Snackbar.
                     Provider.of<LoginState>(context).login();
-                    Scaffold.of(context)
-                        .showSnackBar(SnackBar(content: Text('Processing Data')));
+                    Scaffold.of(context).showSnackBar(
+                        SnackBar(content: Text('Processing Data')));
                   }
                 },
                 child: Text('LogIn'),
               ),
             ),
           ),
-          Center(child: GestureDetector(
-              onTap: (){
-                Navigator.push(context,MaterialPageRoute(builder: (context) => SingUpPage()));
-
-              },
-                      child: Text(
-                'Crear usuario',
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 20,
-                  decoration: TextDecoration.underline,
-                  color: Colors.lightBlue,
-                    ),
-                    
+          Center(
+              child: GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SingUpPage()));
+            },
+            child: Text(
+              'Crear usuario',
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 20,
+                decoration: TextDecoration.underline,
+                color: Colors.lightBlue,
               ),
+            ),
           )),
         ],
       ),

@@ -20,11 +20,12 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (BuildContext context) {
             var state = Provider.of<LoginState>(context);
+            Provider.of<LoginState>(context).recibir();
             if (state.isLoggedIn()) {
-              Provider.of<LoginState>(context).recibir();
+              
               return HomePage();
             } else {
-              Provider.of<LoginState>(context).recibir();
+              
               return LoginPage();
             }
           },

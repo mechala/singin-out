@@ -8,8 +8,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text("Home"),
-        ),
+        title: Text("Home"),
+      ),
       body: Center(
         child: Consumer<LoginState>(
           builder: (BuildContext context, LoginState value, Widget child) {

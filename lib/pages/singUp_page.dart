@@ -8,22 +8,24 @@ class SingUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text("SingUp"),
-        ),
+        title: Text("SingUp"),
+      ),
       body: Center(
-        child:SingUpForm(),
+        child: SingUpForm(),
       ),
     );
   }
 }
+
 class SingUpForm extends StatefulWidget {
   @override
   SingUpFormState createState() {
     return SingUpFormState();
   }
 }
-String usuario= "";
-String password="";
+
+String usuario = "";
+String password = "";
 
 // Define a corresponding State class.
 // This class holds data related to the form.
@@ -35,45 +37,35 @@ class SingUpFormState extends State<SingUpForm> {
   // not a GlobalKey<SingUpFormState>.
   final _formKey = GlobalKey<FormState>();
 
-  
-
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
-     return Form(
+    return Form(
       key: _formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextFormField(
-           
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-             usuario=value;
-              return null;
-            },
-            decoration: InputDecoration(
-                  hintText: "Correo",
-                  icon: Icon(Icons.mail)
-                )
-          ),
-           TextFormField(
-           
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              password=value;
-              return null;
-            },
-            obscureText: true,
-            decoration: InputDecoration(
-                  hintText: "Contraseña",
-                  icon: Icon(Icons.lock)
-                )
-          ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                usuario = value;
+                return null;
+              },
+              decoration:
+                  InputDecoration(hintText: "Correo", icon: Icon(Icons.mail))),
+          TextFormField(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                password = value;
+                return null;
+              },
+              obscureText: true,
+              decoration: InputDecoration(
+                  hintText: "Contraseña", icon: Icon(Icons.lock))),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: Center(
@@ -83,7 +75,7 @@ class SingUpFormState extends State<SingUpForm> {
                   // otherwise.
                   if (_formKey.currentState.validate()) {
                     // If the form is valid, display a Snackbar.
-                    Provider.of<LoginState>(context).singUp(usuario,password);
+                    Provider.of<LoginState>(context).singUp(usuario, password);
                     Scaffold.of(context)
                         .showSnackBar(SnackBar(content: Text('Registrando')));
                     Navigator.pop(context);
