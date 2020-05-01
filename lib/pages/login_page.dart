@@ -39,7 +39,8 @@ class LoginFormState extends State<LoginForm> {
   // Note: This is a `GlobalKey<FormState>`,
   // not a GlobalKey<LoginFormState>.
   final _formKey = GlobalKey<FormState>();
-
+String email;
+String password;
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -53,9 +54,10 @@ class LoginFormState extends State<LoginForm> {
                 if (value.isEmpty) {
                   return 'Please enter some text';
                 }
-                if (value != Provider.of<LoginState>(context).getEmail()) {
+                /* if (value != Provider.of<LoginState>(context).getEmail()) {
                   return "Usuario errado";
-                }
+                } */
+                email = value;
                 return null;
               },
               decoration:
@@ -65,9 +67,10 @@ class LoginFormState extends State<LoginForm> {
                 if (value.isEmpty) {
                   return 'Please enter some text';
                 }
-                if (value != (Provider.of<LoginState>(context).getPassword())) {
+               /*  if (value != (Provider.of<LoginState>(context).getPassword())) {
                   return "Contraseña errada";
-                }
+                } */
+                password= value;
                 return null;
               },
               obscureText: true,
@@ -82,9 +85,9 @@ class LoginFormState extends State<LoginForm> {
                   // otherwise.
                   if (_formKey.currentState.validate()) {
                     // If the form is valid, display a Snackbar.
-                    Provider.of<LoginState>(context).login();
-                    Scaffold.of(context).showSnackBar(
-                        SnackBar(content: Text('Processing Data')));
+                    Provider.of<LoginState>(context).login(email,password);
+                    /* Scaffold.of(context).showSnackBar(
+                        SnackBar(content: Text('Processing Data'))); */
                   }
                 },
                 child: Text('LogIn'),
