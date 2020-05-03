@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginState with ChangeNotifier {
+  bool _loaded=false;
   bool _loggedIn = false;
   String _email = "";
   String _password = "";
@@ -41,6 +42,8 @@ class LoginState with ChangeNotifier {
     if (prefs.getString("username") != null) {
       _username = prefs.getString("username");
     }
+    _loaded=true;
+    notifyListeners();
   }
 
   String getEmail() => _email;
@@ -48,6 +51,8 @@ class LoginState with ChangeNotifier {
   String getToken() => _token;
   String getUsername() => _username;
   bool isLoggedIn() => _loggedIn;
+  bool isLoaded() =>_loaded;
+
 
   void login(String email,String password) async {
      final http.Response response = await http.post(
