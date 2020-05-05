@@ -11,7 +11,7 @@ class LoginPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Login"),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Consumer<LoginState>(
           builder: (BuildContext context, LoginState value, Widget child) {
             return child;

@@ -10,7 +10,7 @@ class SingUpPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("SingUp"),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: SingUpForm(),
       ),
     );
