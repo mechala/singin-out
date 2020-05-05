@@ -22,18 +22,14 @@ class MyApp extends StatelessWidget {
             var state = Provider.of<LoginState>(context);
             Provider.of<LoginState>(context).recibir();
             if (state.isLoaded()) {
-                if (state.isLoggedIn()) {
-              
-              return HomePage();
-            } else {
-              
-              return LoginPage();
-            }
+              if (state.isLoggedIn()) {
+                return HomePage();
+              } else {
+                return LoginPage();
+              }
             } else {
               return SplashScreen();
             }
-            
-          
           },
         },
       ),

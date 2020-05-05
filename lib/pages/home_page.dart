@@ -15,24 +15,43 @@ class HomePage extends StatelessWidget {
           builder: (BuildContext context, LoginState value, Widget child) {
             return child;
           },
-          child: RaisedButton(
-            child: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: <Color>[
-                    Color(0xFF0D47A1),
-                    Color(0xFF1976D2),
-                    Color(0xFF42A5F5),
-                  ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: RaisedButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)),
+              padding: EdgeInsets.all(0.0),
+              textColor: Colors.white,
+              onPressed: () {
+                Provider.of<LoginState>(context).logout();
+              },
+              child: Ink(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: [
+                      Color(0xFF3383CD),
+                      Color(0xFF11249F),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                child: Container(
+                  constraints: BoxConstraints(
+                      minWidth: 88.0,
+                      minHeight: 36.0), // min sizes for Material buttons
+                  height: 40.0,
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Sign Out",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontFamily: 'Lato', fontSize: 20, color: Colors.white),
+                  ),
                 ),
               ),
-              padding: const EdgeInsets.all(10.0),
-              child: const Text('Sing Out', style: TextStyle(fontSize: 20)),
             ),
-            textColor: Colors.white,
-            onPressed: () {
-              Provider.of<LoginState>(context).logout();
-            },
           ),
         ),
       ),

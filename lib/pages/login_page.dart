@@ -39,8 +39,8 @@ class LoginFormState extends State<LoginForm> {
   // Note: This is a `GlobalKey<FormState>`,
   // not a GlobalKey<LoginFormState>.
   final _formKey = GlobalKey<FormState>();
-String email;
-String password;
+  String email;
+  String password;
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -67,10 +67,10 @@ String password;
                 if (value.isEmpty) {
                   return 'Please enter some text';
                 }
-               /*  if (value != (Provider.of<LoginState>(context).getPassword())) {
+                /*  if (value != (Provider.of<LoginState>(context).getPassword())) {
                   return "Contraseña errada";
                 } */
-                password= value;
+                password = value;
                 return null;
               },
               obscureText: true,
@@ -85,9 +85,8 @@ String password;
                   // otherwise.
                   if (_formKey.currentState.validate()) {
                     // If the form is valid, display a Snackbar.
-                    Provider.of<LoginState>(context).login(email,password);
-                    /* Scaffold.of(context).showSnackBar(
-                        SnackBar(content: Text('Processing Data'))); */
+                    Provider.of<LoginState>(context)
+                        .login(email, password, context);
                   }
                 },
                 child: Text('LogIn'),

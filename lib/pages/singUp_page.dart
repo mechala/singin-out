@@ -24,10 +24,10 @@ class SingUpForm extends StatefulWidget {
   }
 }
 
-String email= "";
+String email = "";
 String password = "";
-String usuario="";
-String nombre="";
+String usuario = "";
+String nombre = "";
 
 // Define a corresponding State class.
 // This class holds data related to the form.
@@ -52,11 +52,12 @@ class SingUpFormState extends State<SingUpForm> {
                 if (value.isEmpty) {
                   return 'Please enter some text';
                 }
-                usuario= value;
+                usuario = value;
                 return null;
               },
-              decoration:
-                  InputDecoration(hintText: "Username", icon: Icon(Icons.verified_user))),TextFormField(
+              decoration: InputDecoration(
+                  hintText: "Username", icon: Icon(Icons.verified_user))),
+          TextFormField(
               validator: (value) {
                 if (value.isEmpty) {
                   return 'Please enter some text';
@@ -64,9 +65,9 @@ class SingUpFormState extends State<SingUpForm> {
                 nombre = value;
                 return null;
               },
-              decoration:
-                  InputDecoration(hintText: "Nombre", icon: Icon(Icons.person))),
-                  TextFormField(
+              decoration: InputDecoration(
+                  hintText: "Nombre", icon: Icon(Icons.person))),
+          TextFormField(
               validator: (value) {
                 if (value.isEmpty) {
                   return 'Please enter some text';
@@ -96,10 +97,8 @@ class SingUpFormState extends State<SingUpForm> {
                   // otherwise.
                   if (_formKey.currentState.validate()) {
                     // If the form is valid, display a Snackbar.
-                    Provider.of<LoginState>(context).singUp(email,password,usuario,nombre);
-                    Scaffold.of(context)
-                        .showSnackBar(SnackBar(content: Text('Registrando')));
-                    Navigator.pop(context);
+                    Provider.of<LoginState>(context)
+                        .singUp(email, password, usuario, nombre, context);
                   }
                 },
                 child: Text('SingUp'),
